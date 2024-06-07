@@ -9,7 +9,7 @@ function EmpTable({entries, handleEdit, handleDelete}) {
         { label: "Email", key: "email" },
         { label: "Phone", key: "phone" },
         {label: "DOB", key: "dob" },
-        { label: "Address", key: "address" },                                                                                                                                                                                                       ss
+        { label: "Address", key: "address" },
         { label: "City", key: "city" },
         { label: "State", key: "state" },
         { label: "Country", key: "country" },
