@@ -14,10 +14,7 @@ const {MONGO_URL} = process.env;
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-mongoose.connect(MONGO_URL,{
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
+mongoose.connect(MONGO_URL).then(() => {
     console.log('Connected to MongoDB');
 }
 ).catch((err) => {
@@ -95,7 +92,7 @@ app.get('/company', async (req, res) => {
     res.send(user.company);
 });
 
-
-app.listen(3000, () => {
-    console.log('Server running on port 3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });

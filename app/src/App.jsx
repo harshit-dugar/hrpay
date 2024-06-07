@@ -21,7 +21,7 @@ function App() {
       alert('Passwords do not match')
       return
     }
-    axios.post('http://localhost:3000/register', {
+    axios.post("https://hrpay.onrender.com/register", {
       name,
       email,
       company,
@@ -48,8 +48,7 @@ function App() {
       phone: '',
       DOB: '',
       Address: '',
-      
-      PAN_Card:""
+      PAN_Card:"",
       Aadhar_Number:"",
       Bank_Name:"",      
       IFSC_Code:"",

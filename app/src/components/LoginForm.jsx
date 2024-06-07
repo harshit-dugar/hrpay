@@ -10,7 +10,7 @@ function LoginForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault(); 
-        axios.post('http://localhost:3000/login', {
+        axios.post('https://hrpay.onrender.com/login', {
             email,
             password,
             key
