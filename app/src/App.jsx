@@ -108,9 +108,11 @@ function App() {
 
   // Function to handle delete button click
   const handleDelete = (index) => {
-    const updatedEntries = [...entries];
-    updatedEntries.splice(index, 1);
-    setEntries(updatedEntries);
+    if (window.confirm('Are you sure you want to delete this entry?')) {
+      const updatedEntries = [...entries];
+      updatedEntries.splice(index, 1);
+      setEntries(updatedEntries);
+    }    
   };
 
   // Effect to load data from local storage on component mount
@@ -146,7 +148,7 @@ function App() {
         <Route path="/" element={<Login />}/>
         <Route path='/dashboard' element={<Dashboard count={count} company={company} setCompany={setCompany} salaryFormat={salaryFormat} entries={entries} formData={formData} handleInputChange={handleInputChange} handleSubmitF={handleSubmitF} handleDelete={handleDelete} handleEdit={handleEdit} editIndex={editIndex} opem={opem} setOpen={setOpen}/>}/>
         <Route path='/register' element={<RegisterForm name={name} setName={setName} email={email} setEmail={setEmail} company={company} setCompany={setCompany} password={password} setPassword={setPassword} confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword} handleSubmit={handleSubmit} />}/>
-        <Route path='/employee/:id' element={<EmployeeDetail entries={entries} />}/>
+        <Route path='/employee/:index' element={<EmployeeDetail entries={entries}/>}/>
       </Routes>
       </BrowserRouter>
     </div>

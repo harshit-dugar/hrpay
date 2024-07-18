@@ -65,6 +65,17 @@ function AddEmpForm({ formData, handleInputChange, handleSubmit, editIndex,open,
                     />
                 </div>
                 <div className="mb-6">
+                    <label htmlFor="Aadhar Number" className="block text-lime-800 text-sm font-bold mb-2">Salary</label>
+                    <input
+                        type="text"
+                        id="Aadhar Number"
+                        name="Aadhar Number"
+                        value={formData.Aadhar_Number}
+                        onChange={handleInputChange}
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
+                </div>                 
+                <div className="mb-6">
                     <label htmlFor="paid" className="block text-lime-800 text-sm font-bold mb-2">Payment</label>
                     <input
                         type="text"

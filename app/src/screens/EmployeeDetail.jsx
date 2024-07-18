@@ -1,6 +1,11 @@
 /* eslint-disable react/prop-types */
 
-function EmployeeDetail({employee}) {
+import { useParams } from "react-router-dom"
+
+function EmployeeDetail({entries}) {
+  const {index} = useParams();
+  const employee = entries[parseInt(index)];
+
   return (
     <div>
         <h1 className="text-3xl font-bold text-center">Employee Details</h1>

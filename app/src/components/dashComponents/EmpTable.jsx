@@ -45,7 +45,7 @@ function EmpTable({entries, handleEdit, handleDelete}) {
                         {entries.map((entry, index) => (
                             <tr key={index}>
                                 <td className="py-2">
-                                    <Link to={`/employee/${index}`}>{entry.name}</Link>
+                                    <Link to={`/employee/${index}`} className="text-blue-500 hover:underline">{entry.name}</Link>
                                 </td>
                                 <td className="py-2">{entry.email}</td>
                                 <td className="py-2">{entry.phone}</td>
