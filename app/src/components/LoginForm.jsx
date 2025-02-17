@@ -1,13 +1,11 @@
 //test id: test , test@example.com , test@123 , key: d17h4gydh7
 import { useState } from "react";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [key, setKey] = useState('');
-    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault(); 
@@ -18,8 +16,8 @@ function LoginForm() {
         })
         .then((res) => {
             if(res.data === 'Success') {
-                alert('Login successful');
-                navigate('/dashboard');
+                localStorage.setItem('user', JSON.stringify({ email }));
+                window.location.href = '/dashboard';
             } else {
                 alert('Login failed');
             }

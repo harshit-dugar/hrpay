@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes ,Navigate } from 'react-router-dom'
 import './App.css'
 import Login from './screens/Login'
 import Dashboard from './screens/Dashboard'
@@ -14,6 +14,8 @@ function App() {
   const [company, setCompany] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('user'));
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -31,7 +33,11 @@ function App() {
       //display company name on dashboard
       setCompany(company)
       alert('Registration successful')
-      res.data === 'Success' && window.location.replace('/')      
+      if (res.data === 'Success') {
+        setIsAuthenticated(true)
+        localStorage.setItem('user', email)
+        window.location.href = '/dashboard'
+      }     
     })
     .catch((err) => {
       console.log(err)
@@ -141,12 +147,21 @@ function App() {
     currency:"INR",
   }).format(salaryTotal);
 
+  // Protected Route Component
+  // eslint-disable-next-line react/prop-types
+  const ProtectedRoute = ({ children }) => {
+    return isAuthenticated ? children : <Navigate to="/" />;
+  };
   return (
     <div className='bg-slate-100 h-screen'>
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />}/>
-        <Route path='/dashboard' element={<Dashboard count={count} company={company} setCompany={setCompany} salaryFormat={salaryFormat} entries={entries} formData={formData} handleInputChange={handleInputChange} handleSubmitF={handleSubmitF} handleDelete={handleDelete} handleEdit={handleEdit} editIndex={editIndex} opem={opem} setOpen={setOpen}/>}/>
+        <Route path='/dashboard' element={
+          <ProtectedRoute>
+            <Dashboard count={count} company={company} setCompany={setCompany} salaryFormat={salaryFormat} entries={entries} formData={formData} handleInputChange={handleInputChange} handleSubmitF={handleSubmitF} handleDelete={handleDelete} handleEdit={handleEdit} editIndex={editIndex} opem={opem} setOpen={setOpen}/>
+          </ProtectedRoute> 
+        }/>
         <Route path='/register' element={<RegisterForm name={name} setName={setName} email={email} setEmail={setEmail} company={company} setCompany={setCompany} password={password} setPassword={setPassword} confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword} handleSubmit={handleSubmit} />}/>
         <Route path='/employee/:index' element={<EmployeeDetail entries={entries}/>}/>
       </Routes>

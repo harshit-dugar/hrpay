@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import {Line} from 'react-chartjs-2'
 
-function ChartsLine({data}) {
+function Charts({data}) {
     const chartData = {
         labels: Object.keys(data),
         datasets: [
@@ -37,4 +37,4 @@ function ChartsLine({data}) {
   )
 }
 
-export default ChartsLine
+export default Charts
