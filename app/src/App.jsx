@@ -35,7 +35,6 @@ function App() {
       alert('Registration successful')
       if (res.data === 'Success') {
         setIsAuthenticated(true)
-        localStorage.setItem('user', email)
         window.location.href = '/dashboard'
       }     
     })
@@ -159,7 +158,7 @@ function App() {
         <Route path="/" element={<Login />}/>
         <Route path='/dashboard' element={
           <ProtectedRoute>
-            <Dashboard count={count} company={company} setCompany={setCompany} salaryFormat={salaryFormat} entries={entries} formData={formData} handleInputChange={handleInputChange} handleSubmitF={handleSubmitF} handleDelete={handleDelete} handleEdit={handleEdit} editIndex={editIndex} opem={opem} setOpen={setOpen}/>
+            <Dashboard count={count} company={email} setCompany={setCompany} salaryFormat={salaryFormat} entries={entries} formData={formData} handleInputChange={handleInputChange} handleSubmitF={handleSubmitF} handleDelete={handleDelete} handleEdit={handleEdit} editIndex={editIndex} opem={opem} setOpen={setOpen}/>
           </ProtectedRoute> 
         }/>
         <Route path='/register' element={<RegisterForm name={name} setName={setName} email={email} setEmail={setEmail} company={company} setCompany={setCompany} password={password} setPassword={setPassword} confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword} handleSubmit={handleSubmit} />}/>

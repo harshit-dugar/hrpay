@@ -4,7 +4,7 @@ import EmpTable from '../components/dashComponents/EmpTable'
 import Emplyeeecount from "../components/dashComponents/Emplyeeecount"
 import TotalPays from "../components/dashComponents/TotalPays"
 
-function Dashboard({count,company, salaryFormat, entries, formData, handleInputChange, handleSubmitF, editIndex, opem, setOpen, handleEdit, handleDelete}) {
+function Dashboard({count,company,salaryFormat, entries, formData, handleInputChange, handleSubmitF, editIndex, opem, setOpen, handleEdit, handleDelete}) {
   
   return (
     <div className="flex flex-col justify-center p-8">

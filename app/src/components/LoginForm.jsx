@@ -16,7 +16,8 @@ function LoginForm() {
         })
         .then((res) => {
             if(res.data === 'Success') {
-                localStorage.setItem('user', JSON.stringify({ email }));
+                console.log(res.data);
+                localStorage.setItem('user', JSON.stringify({email}));
                 window.location.href = '/dashboard';
             } else {
                 alert('Login failed');

@@ -3,7 +3,11 @@ const bcrypt = require('bcrypt');
 
 const EmployeeSchema = new mongoose.Schema({
     name: String,
-    email: String,
+    email: {
+        type: String,
+        unique: true,
+        lowercase: true
+    },
     company: String,
     password: String,
     key:{
