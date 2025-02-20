@@ -135,6 +135,10 @@ function App() {
   const count = entries.length; 
   //retrieve salary data from entries
   const salaryTotal = entries.map((entry) => entry.salary).reduce((acc, curr) => acc + parseInt(curr), 0);
+  
+  //get company name from local storage
+  const user = JSON.parse(localStorage.getItem('user'));
+  const companyN = user ? user.cname : '';
 
   //computing the base pay from salary which is per annum
   const basePay = entries.map((entry) => entry.salary /12);
@@ -158,7 +162,7 @@ function App() {
         <Route path="/" element={<Login />}/>
         <Route path='/dashboard' element={
           <ProtectedRoute>
-            <Dashboard count={count} company={email} setCompany={setCompany} salaryFormat={salaryFormat} entries={entries} formData={formData} handleInputChange={handleInputChange} handleSubmitF={handleSubmitF} handleDelete={handleDelete} handleEdit={handleEdit} editIndex={editIndex} opem={opem} setOpen={setOpen}/>
+            <Dashboard count={count} company={companyN} setCompany={setCompany} salaryFormat={salaryFormat} entries={entries} formData={formData} handleInputChange={handleInputChange} handleSubmitF={handleSubmitF} handleDelete={handleDelete} handleEdit={handleEdit} editIndex={editIndex} opem={opem} setOpen={setOpen}/>
           </ProtectedRoute> 
         }/>
         <Route path='/register' element={<RegisterForm name={name} setName={setName} email={email} setEmail={setEmail} company={company} setCompany={setCompany} password={password} setPassword={setPassword} confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword} handleSubmit={handleSubmit} />}/>

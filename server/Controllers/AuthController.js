@@ -22,8 +22,8 @@ module.exports.register = async (req, res) => {
 
 module.exports.login = async (req, res) => {
     try{
-        const {email,password,key} = req.body;
-        if(!email || !password || !key){
+        const {email,password,company,key} = req.body;
+        if(!email || !password || !company || !key){
             return res.send('Please enter all the fields');
         }
         const user = await User.findOne({email});
@@ -32,13 +32,10 @@ module.exports.login = async (req, res) => {
         }
         const isMatch = await bcrypt.compare(password, user.password);
         console.log(isMatch,key === user.key);
-        if(!isMatch || key !== user.key){
+        if(!isMatch || key !== user.key || company !== user.company){
             return res.send('Invalid credentials');
         }
-        res.json({
-            message: 'Success',
-            company: user.company
-        })
+        res.send('Success');
     }catch(err){
         console.log(err);        
     }
