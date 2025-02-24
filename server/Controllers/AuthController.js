@@ -35,7 +35,7 @@ module.exports.login = async (req, res) => {
         if(!isMatch || key !== user.key || company !== user.company){
             return res.send('Invalid credentials');
         }
-        res.semd({
+        res.send({
             message: 'Success',
             company: user.company
         })
