@@ -1,13 +1,37 @@
+import { useState } from "react";
 /* eslint-disable react/prop-types */
-
-function AddEmpForm({ formData, handleInputChange, handleSubmit, editIndex,open,onClose}) {    
-
+function AddEmpForm({ handleSubmitF, editIndex,open,onClose}) {    
+    const [formData, setFormData] = useState(()=>{
+    const storedData = localStorage.getItem('formData');
+    return storedData ? JSON.parse(storedData) : {
+        name:'',
+        age: '',
+        email: '',
+        phone: '',
+        DOB: '',
+        Address: '',
+        PAN_Card:"",
+        Aadhar_Number:"",
+        Bank_Name:"",      
+        IFSC_Code:"",
+        Account_Number:"",
+        salary: '',
+        paid: ''
+        }    
+    });
+    const handleInputChange = (e) => {
+    const {name, value} = e.target;
+    setFormData({
+        ...formData,
+        [name]: value || ''
+    });
+    };
     return (
         //backdrop for form
-        <div className={`fixed inset-0 bg-black bg-opacity-50 z-50 ${open ? 'flex items-center justify-center' : 'hidden'}`} onClick={onClose}>
+        <div className={`fixed inset-0 bg-black bg-opacity-50 z-50 ${open ? 'flex justify-center overflow-y-auto' : 'hidden'}`} onClick={onClose}>
 
-        <div className="flex justify-center items-center w-1/2" onClick={(e)=> e.stopPropagation()}>
-            <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full">
+        <div className="flex justify-center items-center w-1/2">
+            <form onSubmit={handleSubmitF} className="bg-white p-8 rounded shadow-md w-full"  onClick={(e)=> e.stopPropagation()}>
                 <h1 className="text-3xl font-bold text-center">Add Employee</h1>
                 <div className="mb-4">
                     <label htmlFor="name" className="block text-lime-800 text-sm font-bold mb-2">Name</label>
@@ -53,6 +77,90 @@ function AddEmpForm({ formData, handleInputChange, handleSubmit, editIndex,open,
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                 </div>
+                {/*DOB*/}
+                <div className="mb-6">
+                    <label htmlFor="DOB" className="block text-lime-800 text-sm font-bold mb-2">DOB</label>
+                    <input
+                        type="date"
+                        id="DOB"
+                        name="DOB"
+                        value={formData.DOB}
+                        onChange={handleInputChange}
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
+                </div>
+                {/*Address*/}
+                <div className="mb-6">
+                    <label htmlFor="Address" className="block text-lime-800 text-sm font-bold mb-2">Address</label>
+                    <input
+                        type="text"
+                        id="Address"
+                        name="Address"
+                        value={formData.Address}
+                        onChange={handleInputChange}
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
+                </div>
+                {/*PAN Card*/}
+                <div className="mb-6">
+                    <label htmlFor="PAN Card" className="block text-lime-800 text-sm font-bold mb-2">PAN Card</label>
+                    <input
+                        type="text"
+                        id="PAN Card"
+                        name="PAN_Card"
+                        value={formData.PAN_Card}
+                        onChange={handleInputChange}
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
+                </div>
+                {/*Aadhar Number*/}
+                <div className="mb-6">
+                    <label htmlFor="Aadhar Number" className="block text-lime-800 text-sm font-bold mb-2">Aadhar Number</label>
+                    <input
+                        type="text"
+                        id="Aadhar Number"
+                        name="Aadhar_Number"
+                        value={formData.Aadhar_Number}
+                        onChange={handleInputChange}
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
+                </div>
+                {/*Bank Name*/}
+                <div className="mb-6">
+                    <label htmlFor="Bank Name" className="block text-lime-800 text-sm font-bold mb-2">Bank Name</label>
+                    <input
+                        type="text"
+                        id="Bank Name"
+                        name="Bank_Name"
+                        value={formData.Bank_Name}
+                        onChange={handleInputChange}
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
+                </div>
+                {/*IFSC Code*/}
+                <div className="mb-6">
+                    <label htmlFor="IFSC Code" className="block text-lime-800 text-sm font-bold mb-2">IFSC Code</label>
+                    <input
+                        type="text"
+                        id="IFSC Code"
+                        name="IFSC_Code"
+                        value={formData.IFSC_Code}
+                        onChange={handleInputChange}
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
+                </div>
+                {/*Account Number*/}
+                <div className="mb-6">
+                    <label htmlFor="Account Number" className="block text-lime-800 text-sm font-bold mb-2">Account Number</label>
+                    <input
+                        type="text"
+                        id="Account Number"
+                        name="Account_Number"
+                        value={formData.Account_Number}
+                        onChange={handleInputChange}
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
+                </div>
                 <div className="mb-6">
                     <label htmlFor="salary" className="block text-lime-800 text-sm font-bold mb-2">Salary</label>
                     <input
@@ -60,17 +168,6 @@ function AddEmpForm({ formData, handleInputChange, handleSubmit, editIndex,open,
                         id="salary"
                         name="salary"
                         value={formData.salary}
-                        onChange={handleInputChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    />
-                </div>
-                <div className="mb-6">
-                    <label htmlFor="Aadhar Number" className="block text-lime-800 text-sm font-bold mb-2">Salary</label>
-                    <input
-                        type="text"
-                        id="Aadhar Number"
-                        name="Aadhar Number"
-                        value={formData.Aadhar_Number}
                         onChange={handleInputChange}
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />

@@ -47,7 +47,7 @@ function App() {
   const [formData, setFormData] = useState(()=>{
     const storedData = localStorage.getItem('formData');
     return storedData ? JSON.parse(storedData) : {
-      name: '',
+      name:'',
       age: '',
       email: '',
       phone: '',
@@ -64,16 +64,12 @@ function App() {
   });
   // State to hold list of entries
   const [entries, setEntries] = useState(()=>{
-    const storedEntries = localStorage.getItem('entries');
+    const storedEntries = localStorage.getItem('formData');
     return storedEntries ? JSON.parse(storedEntries) : [];
   });
 
   // State to hold index of entry being edited
   const [editIndex, setEditIndex] = useState(null);
-  const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
-  };
   const handleSubmitF = (e) => {
       e.preventDefault();
       if (editIndex !== null) {
@@ -85,10 +81,11 @@ function App() {
       } else {
           // Add new entry to the list
           setEntries([...entries, formData]);
+          console.log(entries);
       }
       // Reset form data
       setFormData({
-          name: '',
+          name:'',
           age: '',
           email: '',
           phone: '',
@@ -122,16 +119,17 @@ function App() {
 
   // Effect to load data from local storage on component mount
   useEffect(() => {
-    const storedEntries = localStorage.getItem('entries');
+    const storedEntries = localStorage.getItem('formData');
     if (storedEntries) {
       setEntries(JSON.parse(storedEntries));
     }
   }, []);
 
   // Effect to save data to local storage whenever entries change
-  useEffect(() => {
-    localStorage.setItem('entries', JSON.stringify(entries));
-  }, [entries]);
+  useEffect(()=>{
+    localStorage.setItem('formData', JSON.stringify(entries));
+  }
+  ,[entries]);
   const count = entries.length; 
   //retrieve salary data from entries
   const salaryTotal = entries.map((entry) => entry.salary).reduce((acc, curr) => acc + parseInt(curr), 0);
@@ -141,8 +139,7 @@ function App() {
   const companyN = user ? user.cname : '';
 
   //computing the base pay from salary which is per annum
-  const basePay = entries.map((entry) => entry.salary /12);
-  console.log(basePay);
+  const basePay = entries.map((entry) => entry.salary);
 
   //format salaryTotal to currency
   const salaryFormat = new Intl.NumberFormat('en-IN', {
@@ -162,7 +159,7 @@ function App() {
         <Route path="/" element={<Login />}/>
         <Route path='/dashboard' element={
           <ProtectedRoute>
-            <Dashboard count={count} company={companyN} setCompany={setCompany} salaryFormat={salaryFormat} entries={entries} formData={formData} handleInputChange={handleInputChange} handleSubmitF={handleSubmitF} handleDelete={handleDelete} handleEdit={handleEdit} editIndex={editIndex} opem={opem} setOpen={setOpen}/>
+            <Dashboard count={count} company={companyN} setCompany={setCompany} salaryFormat={salaryFormat} entries={entries} handleSubmitF={handleSubmitF} handleDelete={handleDelete} handleEdit={handleEdit} editIndex={editIndex} opem={opem} setOpen={setOpen}/>
           </ProtectedRoute> 
         }/>
         <Route path='/register' element={<RegisterForm name={name} setName={setName} email={email} setEmail={setEmail} company={company} setCompany={setCompany} password={password} setPassword={setPassword} confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword} handleSubmit={handleSubmit} />}/>
