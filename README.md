@@ -44,5 +44,6 @@ At the login screen use this test user
 
     Login Email - test@example.com
     Password - test@123
+    Company -test
     key - d17h4gydh7
 
