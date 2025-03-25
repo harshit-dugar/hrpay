@@ -17,8 +17,9 @@ A step by step series of examples that tell you how to get a development environ
 To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
 ```bash
-# Clone this repository
-$ git clone https://github.com/harshit-dugar/hrpay
+# Fork the repository
+# Clone the forked repository
+$ git clone https://github.com/[your-username]/hrpay
 
 # Go into the repository
 $ cd hrpay
